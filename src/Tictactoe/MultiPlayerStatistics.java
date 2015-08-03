@@ -60,6 +60,7 @@ public void setSup(LeaderBoardHandler_MultiPlayer sup){
         exit.setForeground(new java.awt.Color(51, 204, 0));
         exit.setText("Exit");
         exit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        exit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitActionPerformed(evt);
@@ -130,6 +131,7 @@ public void setSup(LeaderBoardHandler_MultiPlayer sup){
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 153, 0));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/Untitled.png"))); // NOI18N
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(jLabel6);
         jLabel6.setBounds(0, 0, 598, 473);
 

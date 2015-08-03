@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author Uer
@@ -125,6 +126,7 @@ public class TicTacToeBoardSinglePlayer extends javax.swing.JFrame {
         playAgain.setForeground(new java.awt.Color(51, 204, 0));
         playAgain.setText("Play Again");
         playAgain.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        playAgain.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         playAgain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playAgainActionPerformed(evt);
@@ -145,7 +147,7 @@ public class TicTacToeBoardSinglePlayer extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(480, 50, 100, 40);
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(360, 90, 100, 90);
+        jLabel2.setBounds(360, 80, 110, 100);
 
         jLabel5.setFont(new java.awt.Font("Cooper Black", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 102, 0));
@@ -173,7 +175,7 @@ public class TicTacToeBoardSinglePlayer extends javax.swing.JFrame {
         getContentPane().add(tot_Wins);
         tot_Wins.setBounds(340, 280, 130, 42);
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(480, 90, 110, 100);
+        jLabel1.setBounds(480, 80, 110, 100);
 
         slot0.setBackground(new java.awt.Color(255, 255, 255));
         slot0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.jpg"))); // NOI18N
@@ -455,6 +457,7 @@ public class TicTacToeBoardSinglePlayer extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Tied !", "GameOver", JOptionPane.INFORMATION_MESSAGE);
                     sup.inTies();
                     updateDatabase();
+                    //logger.info("Tied");
                                         
                 }
                 else if (winner==2){
@@ -467,6 +470,7 @@ public class TicTacToeBoardSinglePlayer extends javax.swing.JFrame {
                     tot_Losses.setText((String)String.valueOf(sup.getLosses()));
                     tot_Wins.repaint();
                     tot_Losses.repaint();
+                    //logger.info("You Won");
                 }
                 else if(winner==3){
                     isGameOver = true;
@@ -478,6 +482,7 @@ public class TicTacToeBoardSinglePlayer extends javax.swing.JFrame {
                     tot_Losses.setText((String)String.valueOf(sup.getLosses()));
                     tot_Wins.repaint();
                     tot_Losses.repaint();
+                    //logger.info("Computer Won");
                 }
                            
             }

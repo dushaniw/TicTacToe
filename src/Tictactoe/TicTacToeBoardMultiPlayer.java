@@ -277,6 +277,7 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
         playAgain.setFont(new java.awt.Font("Cooper Black", 0, 14)); // NOI18N
         playAgain.setForeground(new java.awt.Color(51, 204, 0));
         playAgain.setText("Play Again");
+        playAgain.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         playAgain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playAgainActionPerformed(evt);

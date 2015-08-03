@@ -131,6 +131,9 @@
             <BevelBorder/>
           </Border>
         </Property>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="playAgainActionPerformed"/>
@@ -176,7 +179,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="360" y="90" width="100" height="90"/>
+          <AbsoluteConstraints x="360" y="80" width="110" height="100"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -249,7 +252,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="480" y="90" width="110" height="100"/>
+          <AbsoluteConstraints x="480" y="80" width="110" height="100"/>
         </Constraint>
       </Constraints>
     </Component>

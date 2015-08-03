@@ -52,12 +52,16 @@ public class SingleUserInfo extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        setEnabled(false);
         getContentPane().setLayout(null);
 
         play.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
         play.setForeground(new java.awt.Color(51, 204, 0));
         play.setText("Play TicTacToe");
         play.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        play.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        play.setEnabled(false);
         play.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playActionPerformed(evt);
@@ -76,6 +80,7 @@ public class SingleUserInfo extends javax.swing.JFrame {
         back.setForeground(new java.awt.Color(51, 204, 0));
         back.setText("Back");
         back.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        back.setEnabled(false);
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);

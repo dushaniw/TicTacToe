@@ -109,6 +109,7 @@ public class SinglePlayerStatistics extends javax.swing.JFrame {
         exit.setForeground(new java.awt.Color(51, 204, 0));
         exit.setText("Exit");
         exit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        exit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitActionPerformed(evt);
