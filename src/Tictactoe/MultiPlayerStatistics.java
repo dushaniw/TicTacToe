@@ -14,6 +14,8 @@ import java.awt.Toolkit;
  */
 public class MultiPlayerStatistics extends javax.swing.JFrame {
     LeaderBoardHandler_MultiPlayer sup;
+    TicTacToeBoardMultiPlayer caller;
+    
     /**
      * Creates new form MultiPlayerStatistics
      */
@@ -25,13 +27,24 @@ public class MultiPlayerStatistics extends javax.swing.JFrame {
         setSize(jLabel6.getWidth(), jLabel6.getHeight());
     }
     
-public void setSup(LeaderBoardHandler_MultiPlayer sup){
+public void setSup1(LeaderBoardHandler_MultiPlayer sup,TicTacToeBoardMultiPlayer caller){
         this.sup=sup;
+        this.caller=caller;
         player.setText((String)String.valueOf(sup.getName1()));
         wins.setText((String) String.valueOf(sup.getWins1()));
         losses.setText((String) String.valueOf(sup.getLosses1()));
         ties.setText((String) String.valueOf(sup.getTies1()));
     }
+
+public void setSup2(LeaderBoardHandler_MultiPlayer sup,TicTacToeBoardMultiPlayer caller){
+        this.sup=sup;
+        this.caller=caller;
+        player.setText((String)String.valueOf(sup.getName2()));
+        wins.setText((String) String.valueOf(sup.getWins2()));
+        losses.setText((String) String.valueOf(sup.getLosses2()));
+        ties.setText((String) String.valueOf(sup.getTies2()));
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,7 +54,7 @@ public void setSup(LeaderBoardHandler_MultiPlayer sup){
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        exit = new javax.swing.JButton();
+        back = new javax.swing.JButton();
         player = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -56,20 +69,22 @@ public void setSup(LeaderBoardHandler_MultiPlayer sup){
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        exit.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
-        exit.setForeground(new java.awt.Color(51, 204, 0));
-        exit.setText("Exit");
-        exit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        exit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        exit.addActionListener(new java.awt.event.ActionListener() {
+        back.setBackground(new java.awt.Color(170, 140, 53));
+        back.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
+        back.setForeground(new java.awt.Color(255, 255, 255));
+        back.setText("Back");
+        back.setBorderPainted(false);
+        back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitActionPerformed(evt);
+                backActionPerformed(evt);
             }
         });
-        getContentPane().add(exit);
-        exit.setBounds(450, 340, 130, 40);
+        getContentPane().add(back);
+        back.setBounds(450, 340, 130, 40);
 
         player.setEditable(false);
+        player.setBackground(new java.awt.Color(255, 255, 255));
         player.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         player.setForeground(new java.awt.Color(0, 102, 0));
         getContentPane().add(player);
@@ -94,8 +109,10 @@ public void setSup(LeaderBoardHandler_MultiPlayer sup){
         jLabel2.setBounds(60, 120, 130, 30);
 
         wins.setEditable(false);
+        wins.setBackground(java.awt.Color.white);
         wins.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         wins.setForeground(new java.awt.Color(0, 102, 0));
+        wins.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         wins.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 winsActionPerformed(evt);
@@ -105,8 +122,10 @@ public void setSup(LeaderBoardHandler_MultiPlayer sup){
         wins.setBounds(60, 240, 70, 60);
 
         ties.setEditable(false);
+        ties.setBackground(java.awt.Color.white);
         ties.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         ties.setForeground(new java.awt.Color(0, 102, 0));
+        ties.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         getContentPane().add(ties);
         ties.setBounds(410, 240, 70, 60);
 
@@ -117,8 +136,10 @@ public void setSup(LeaderBoardHandler_MultiPlayer sup){
         jLabel4.setBounds(220, 200, 130, 30);
 
         losses.setEditable(false);
+        losses.setBackground(java.awt.Color.white);
         losses.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         losses.setForeground(new java.awt.Color(0, 102, 0));
+        losses.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         getContentPane().add(losses);
         losses.setBounds(240, 240, 70, 60);
 
@@ -133,14 +154,15 @@ public void setSup(LeaderBoardHandler_MultiPlayer sup){
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/Untitled.png"))); // NOI18N
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(0, 0, 598, 473);
+        jLabel6.setBounds(0, 0, 598, 400);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         this.dispose();
-    }//GEN-LAST:event_exitActionPerformed
+        this.caller.setVisible(true);
+    }//GEN-LAST:event_backActionPerformed
 
     private void winsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_winsActionPerformed
         // TODO add your handling code here:
@@ -182,7 +204,7 @@ public void setSup(LeaderBoardHandler_MultiPlayer sup){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton exit;
+    private javax.swing.JButton back;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

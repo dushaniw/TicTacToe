@@ -20,6 +20,7 @@ public class SingleUserInfo extends javax.swing.JFrame {
      * Creates new form User
      */
     public SingleUserInfo() {
+        setUndecorated(true);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         initComponents();
         setLocation((dim.width - jLabel5.getWidth())/2, (dim.height - jLabel5.getHeight())/2);
@@ -53,22 +54,21 @@ public class SingleUserInfo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        setEnabled(false);
         getContentPane().setLayout(null);
 
+        play.setBackground(new java.awt.Color(170, 140, 53));
         play.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
-        play.setForeground(new java.awt.Color(51, 204, 0));
+        play.setForeground(new java.awt.Color(255, 255, 255));
         play.setText("Play TicTacToe");
-        play.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        play.setBorderPainted(false);
         play.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        play.setEnabled(false);
         play.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playActionPerformed(evt);
             }
         });
         getContentPane().add(play);
-        play.setBounds(370, 260, 190, 50);
+        play.setBounds(370, 260, 180, 50);
 
         playerName.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
         playerName.setForeground(new java.awt.Color(0, 102, 0));
@@ -76,11 +76,12 @@ public class SingleUserInfo extends javax.swing.JFrame {
         getContentPane().add(playerName);
         playerName.setBounds(210, 30, 308, 40);
 
+        back.setBackground(new java.awt.Color(170, 140, 53));
         back.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
-        back.setForeground(new java.awt.Color(51, 204, 0));
+        back.setForeground(new java.awt.Color(255, 255, 255));
         back.setText("Back");
-        back.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        back.setEnabled(false);
+        back.setBorderPainted(false);
+        back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
@@ -89,11 +90,11 @@ public class SingleUserInfo extends javax.swing.JFrame {
         getContentPane().add(back);
         back.setBounds(190, 260, 140, 50);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/0.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/0.png"))); // NOI18N
         getContentPane().add(jLabel3);
         jLabel3.setBounds(400, 120, 90, 100);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/x .jpg"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/x.png"))); // NOI18N
         getContentPane().add(jLabel4);
         jLabel4.setBounds(240, 130, 80, 80);
 
@@ -103,7 +104,7 @@ public class SingleUserInfo extends javax.swing.JFrame {
         getContentPane().add(jRadioButton1);
         jRadioButton1.setBounds(260, 100, 21, 21);
 
-        jRadioButton2.setBackground(new java.awt.Color(0, 51, 102));
+        jRadioButton2.setBackground(new java.awt.Color(255, 0, 0));
         jRadioButton2.setForeground(new java.awt.Color(0, 102, 0));
         getContentPane().add(jRadioButton2);
         jRadioButton2.setBounds(420, 100, 21, 21);
@@ -122,7 +123,7 @@ public class SingleUserInfo extends javax.swing.JFrame {
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/Untitled.png"))); // NOI18N
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(0, 0, 598, 473);
+        jLabel5.setBounds(0, 0, 600, 330);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -8,6 +8,8 @@ package Tictactoe;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
 
 /**
  *
@@ -17,7 +19,7 @@ public class DB {
     private String JDBC_DRIVER = new String("com.mysql.jdbc.Driver");
     private String DB_URL = new String("jdbc:mysql://localhost/tictactoe");
     private Connection conn = null;
-    
+    private static Logger logger = Logger.getLogger(DB.class);
     public boolean connectLocal() {
 		// variables for user
                 
@@ -31,10 +33,12 @@ public class DB {
 			// connecting to database
 			conn = DriverManager.getConnection(DB_URL, userName, password);
                } catch (SQLException e) {
+                        logger.log(Priority.ERROR, "Connection could not established", e);
                         // if exception found return false
 			return false;
 		} catch (ClassNotFoundException e) {
                         // if exception found return false
+                        logger.log(Priority.ERROR,"Could not register JDBC driver",e);
 			return false;
 		}
 
@@ -46,6 +50,7 @@ public class DB {
 		try {
 			conn.close();
 		} catch (Exception e) {
+                    logger.log(Priority.ERROR,"Could not disconnectlo",e);
 			return false;
 		}
 		return true;
@@ -63,7 +68,7 @@ public class DB {
             resultSet = statement.executeQuery(sql);
 
         } catch (SQLException e) {
-
+            logger.log(Priority.ERROR,"Sql statement Error",e);
             e.printStackTrace();
         }
         return resultSet;
@@ -107,6 +112,7 @@ public class DB {
 				result.add((String) resultSet.getString(column));
 			}
 		} catch (SQLException e) {
+                    logger.log(Priority.ERROR,"Could not extract data",e);
 			e.printStackTrace();
 		} finally {
 			try {
@@ -176,7 +182,8 @@ public boolean executeLocal(String sql) {
                         return true;
 
 		} catch (Exception e) {
-                        System.out.println("sql statement executing error");
+                    logger.log(Priority.ERROR,"sql statement executing error",e);
+                        
 			return false;
 		}
 

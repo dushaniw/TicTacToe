@@ -23,7 +23,7 @@ public class MultiplayerUserInfo extends javax.swing.JFrame {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         initComponents();
         setLocation((dim.width - jLabel4.getWidth())/2, (dim.height - jLabel4.getHeight())/2);
-        setSize(jLabel4.getWidth()-20, jLabel4.getHeight()-40);
+        setSize(jLabel4.getWidth(), jLabel4.getHeight());
     }
 
     /**
@@ -51,61 +51,67 @@ public class MultiplayerUserInfo extends javax.swing.JFrame {
         player1Name.setForeground(new java.awt.Color(0, 102, 0));
         player1Name.setText("Player1");
         getContentPane().add(player1Name);
-        player1Name.setBounds(190, 110, 310, 50);
+        player1Name.setBounds(150, 70, 350, 50);
 
         jLabel2.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 204, 0));
         jLabel2.setText("Player1");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(90, 110, 80, 50);
+        jLabel2.setBounds(50, 70, 80, 50);
 
+        back.setBackground(new java.awt.Color(170, 140, 53));
         back.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
-        back.setForeground(new java.awt.Color(51, 204, 0));
+        back.setForeground(new java.awt.Color(255, 255, 255));
         back.setText("Back");
-        back.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        back.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
+        back.setBorderPainted(false);
+        back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
             }
         });
         getContentPane().add(back);
-        back.setBounds(190, 300, 180, 40);
+        back.setBounds(140, 250, 140, 50);
 
+        play.setBackground(new java.awt.Color(170, 140, 53));
         play.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
-        play.setForeground(new java.awt.Color(51, 204, 0));
+        play.setForeground(new java.awt.Color(255, 255, 255));
         play.setText("Play TicTacToe");
-        play.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        play.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
+        play.setBorderPainted(false);
+        play.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         play.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playActionPerformed(evt);
             }
         });
         getContentPane().add(play);
-        play.setBounds(400, 300, 180, 40);
+        play.setBounds(340, 250, 160, 50);
 
         player2Name.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
         player2Name.setForeground(new java.awt.Color(0, 102, 0));
         player2Name.setText("Player2");
         getContentPane().add(player2Name);
-        player2Name.setBounds(190, 200, 310, 50);
+        player2Name.setBounds(150, 150, 350, 50);
 
-        jLabel1.setFont(new java.awt.Font("Cooper Black", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Cooper Black", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 204, 0));
         jLabel1.setText("Enter Your Names");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(120, 20, 380, 45);
+        jLabel1.setBounds(170, 10, 240, 30);
 
         jLabel3.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 204, 0));
         jLabel3.setText("Player2");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(90, 197, 80, 50);
+        jLabel3.setBounds(50, 150, 80, 50);
 
         jLabel4.setFont(new java.awt.Font("Cooper Black", 0, 11)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(51, 204, 0));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/Untitled.png"))); // NOI18N
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, 0, 598, 473);
+        jLabel4.setBounds(0, 0, 560, 330);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -167,6 +173,7 @@ public class MultiplayerUserInfo extends javax.swing.JFrame {
 
         TicTacToeBoardMultiPlayer multiPlay = new TicTacToeBoardMultiPlayer();
         multiPlay.setSup(support);
+    
         multiPlay.show();
         this.dispose();
 

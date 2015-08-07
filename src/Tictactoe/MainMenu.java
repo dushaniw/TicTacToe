@@ -24,7 +24,7 @@ public class MainMenu extends javax.swing.JFrame {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         initComponents();
         setLocation((dim.width - jLabel4.getWidth())/2, (dim.height - jLabel4.getHeight())/2);
-        setSize(jLabel4.getWidth()-20, jLabel4.getHeight()-40);
+        setSize(jLabel4.getWidth(), jLabel4.getHeight());
         
         
     }
@@ -50,18 +50,17 @@ public class MainMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        setResizable(false);
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Cooper Black", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 204, 0));
         jLabel1.setText("TicTacToe ");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(290, 160, 332, 41);
+        jLabel1.setBounds(160, 120, 240, 30);
 
         multiPlayer.setBackground(new java.awt.Color(255, 255, 153));
         multiPlayer.setFont(new java.awt.Font("Gabriola", 1, 24)); // NOI18N
-        multiPlayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/multPlayer.jpg"))); // NOI18N
+        multiPlayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/multPlayer.png"))); // NOI18N
         multiPlayer.setText("Multi Player");
         multiPlayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,11 +68,11 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(multiPlayer);
-        multiPlayer.setBounds(180, 370, 430, 70);
+        multiPlayer.setBounds(180, 300, 190, 50);
 
         singlePlayer.setBackground(new java.awt.Color(255, 255, 153));
         singlePlayer.setFont(new java.awt.Font("Gabriola", 1, 24)); // NOI18N
-        singlePlayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/singleplayer.jpg"))); // NOI18N
+        singlePlayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/singleplayer.png"))); // NOI18N
         singlePlayer.setText("Single Player");
         singlePlayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,32 +80,32 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(singlePlayer);
-        singlePlayer.setBounds(190, 240, 410, 60);
+        singlePlayer.setBounds(180, 200, 190, 50);
 
         leaderboard.setBackground(new java.awt.Color(255, 255, 153));
         leaderboard.setFont(new java.awt.Font("Gabriola", 1, 24)); // NOI18N
-        leaderboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/leaderboard.jpg"))); // NOI18N
+        leaderboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/leaderboard.png"))); // NOI18N
         leaderboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 leaderboardActionPerformed(evt);
             }
         });
         getContentPane().add(leaderboard);
-        leaderboard.setBounds(180, 520, 430, 60);
+        leaderboard.setBounds(170, 420, 180, 40);
 
         exit.setFont(new java.awt.Font("Gabriola", 0, 24)); // NOI18N
-        exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/exitBtn.jpg"))); // NOI18N
+        exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/exitbtn.png"))); // NOI18N
         exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitActionPerformed(evt);
             }
         });
         getContentPane().add(exit);
-        exit.setBounds(460, 690, 140, 50);
+        exit.setBounds(310, 530, 120, 40);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/menue.jpg"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/menu.png"))); // NOI18N
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, 0, 780, 810);
+        jLabel4.setBounds(0, 0, 530, 655);
         jLabel4.getAccessibleContext().setAccessibleName("jLabel4");
 
         pack();

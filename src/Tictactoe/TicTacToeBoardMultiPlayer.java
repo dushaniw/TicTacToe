@@ -14,12 +14,15 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Uer
  */
 public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
+    private String player1;
+    private String player2;
     private JLabel slots[];
     private boolean isGameOver = false;
     private ImageIcon circle;
@@ -31,11 +34,21 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
     private TicTacToeGame game;
     private char curr_Turn=game.HUMAN_PLAYER;
     private ImageIcon nullSymbol;
+    private int turn=0;
     
+     private static Logger logger = Logger.getLogger(TicTacToeBoardSinglePlayer.class);
+     
      public void setSup(LeaderBoardHandler_MultiPlayer sup){
        this.sup = sup;
        this.db = sup.getDb();
-    }
+       this.player1=this.sup.getName1();
+       this.player2=this.sup.getName2();  
+       jLabel3.setText(player1);
+       jLabel4.setText(player2);
+       jMenu2.setText(player1);
+       jMenu3.setText(player2);
+       gameStatus.setText(player1+"'s turn..");
+     }
     /**
      * Creates new form TicTacToeBoardMultiPlayer
      */
@@ -45,9 +58,9 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
         initComponents();
         setLocation((dim.width - jLabel5.getWidth())/2, (dim.height - jLabel5.getHeight())/2);
         setSize(jLabel5.getWidth(), jLabel5.getHeight());
-        cross = new ImageIcon("src/Tictactoe/imgx.jpg");
-        circle = new ImageIcon("src/Tictactoe/imgo.jpg");
-        this.nullSymbol=new ImageIcon("src/Tictactoe/img1.jpg");
+        cross = new ImageIcon("src/Tictactoe/imgx.png");
+        circle = new ImageIcon("src/Tictactoe/imgo.png");
+        this.nullSymbol=new ImageIcon("src/Tictactoe/img1.png");
         slots= new JLabel[TicTacToeGame.getBOARD_SIZE()];
         slots[0]=slot0;
         slots[1]=slot1;
@@ -61,16 +74,23 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
         game = new TicTacToeGame();   
         startNewGame();
     }
+    
     private void startNewGame(){
         hasPlayer1Won=false;
         hasPlayer2Won = false;
         game.clearBoard();
+        if (turn%2==0)
+            gameStatus.setText(player1+"'s turn..");
+        else
+            gameStatus.setText(player2+"'s turn..");
+        turn++;
         for(int i=0;i<9;i++){
             slots[i].setIcon(this.nullSymbol);
             slots[i].setEnabled(true);
             slots[i].addMouseListener(new MouseAdapter(){
                 @Override
                 public void mouseClicked(MouseEvent e){
+                   
                     CheckSlotClick(e);
                 
                 }
@@ -93,10 +113,12 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
             
         if(slots[move].isEnabled()){
             if (this.curr_Turn==game.HUMAN_PLAYER){
+             // gameStatus.setText(player2+"'s turn..");
                 setMove(game.HUMAN_PLAYER,move);
                 this.curr_Turn=game.COMP_PLAYER;
             }
             else if (this.curr_Turn==game.COMP_PLAYER){
+               // gameStatus.setText(player1+"'s turn..");
                 setMove(game.COMP_PLAYER,move);
                 this.curr_Turn=game.HUMAN_PLAYER;
             }
@@ -107,6 +129,7 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
                 if (winner==1){
                     isGameOver = true;
                     JOptionPane.showMessageDialog(null, "Tied !", "GameOver", JOptionPane.INFORMATION_MESSAGE);
+                    logger.info("MulitPlayerMode("+this.player1+" & "+this.player2+" :Tied");
                     sup.inTies1();
                     sup.inTies2();
                     updateDatabase();
@@ -114,7 +137,8 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
                 }
                 else if (winner==2){
                     isGameOver = true;
-                    JOptionPane.showMessageDialog(null, "Player1 wins !", "GameOver", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, this.player1+" wins !", "GameOver", JOptionPane.INFORMATION_MESSAGE);
+                    logger.info("MulitPlayerMode("+this.player1+" & "+this.player2+" :"+this.player1+" Wins");
                     hasPlayer1Won=true;
                     sup.inWins1();
                     sup.inLosses2();
@@ -122,7 +146,8 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
                  }
                 else if(winner==3){
                     isGameOver = true;
-                    JOptionPane.showMessageDialog(null, "Player2 wins !", "GameOver", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, this.player2+" wins !", "GameOver", JOptionPane.INFORMATION_MESSAGE);
+                    logger.info("MulitPlayerMode("+this.player1+" & "+this.player2+" :"+this.player2+" Wins");
                     hasPlayer2Won=true;
                     sup.inLosses1();
                     sup.inWins2();
@@ -130,6 +155,12 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
                 }
                 else if (winner==0){
                     //nothing
+                        if(curr_Turn==game.HUMAN_PLAYER){
+                        gameStatus.setText(player1+"'s turn..");
+                     }
+                    else {
+                        gameStatus.setText(player2+"'s turn..");
+                    }
                 }
                 
                 
@@ -162,6 +193,7 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
             if (hasPlayer1Won){
                 ArrayList<String> winsList = db.selectLocal("user", "MultiPlay_Wins", "name = '" + user1 + "'" );
                 int wins = Integer.parseInt(winsList.get(0));
+               
                 wins++;
                 String statement = "update user set MultiPlay_Wins = " + wins + " where name = '" + user1 +"'";
                 db.executeLocal(statement);
@@ -174,7 +206,7 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
                 
             }
             else if (hasPlayer2Won){
-                
+             
                 ArrayList<String> winsList = db.selectLocal("user", "MultiPlay_Wins", "name = '" + user2 + "'" );
                 int wins = Integer.parseInt(winsList.get(0));
                 wins++;
@@ -205,18 +237,9 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
             }
             
         }   
+   
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -240,6 +263,8 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
         slot5 = new javax.swing.JLabel();
         slot3 = new javax.swing.JLabel();
         slot6 = new javax.swing.JLabel();
+        exitGame = new javax.swing.JButton();
+        gameStatus = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -248,17 +273,18 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
         backToMain = new javax.swing.JMenuItem();
         exit = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        mpStat = new javax.swing.JMenuItem();
+        player1start = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        player2stat = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(100, 100));
         getContentPane().setLayout(null);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/x .jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/x.png"))); // NOI18N
         getContentPane().add(jLabel2);
         jLabel2.setBounds(370, 90, 83, 94);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/0.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/0.png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(480, 100, 71, 76);
 
@@ -274,9 +300,11 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(480, 60, 90, 30);
 
-        playAgain.setFont(new java.awt.Font("Cooper Black", 0, 14)); // NOI18N
-        playAgain.setForeground(new java.awt.Color(51, 204, 0));
+        playAgain.setBackground(new java.awt.Color(170, 140, 53));
+        playAgain.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
+        playAgain.setForeground(new java.awt.Color(255, 255, 255));
         playAgain.setText("Play Again");
+        playAgain.setBorderPainted(false);
         playAgain.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         playAgain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,9 +312,9 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
             }
         });
         getContentPane().add(playAgain);
-        playAgain.setBounds(370, 320, 180, 50);
+        playAgain.setBounds(290, 420, 140, 40);
 
-        slot4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.jpg"))); // NOI18N
+        slot4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.png"))); // NOI18N
         slot4.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)));
         slot4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot4.setMaximumSize(new java.awt.Dimension(100, 100));
@@ -296,7 +324,7 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
         getContentPane().add(slot4);
         slot4.setBounds(130, 180, 100, 100);
 
-        slot8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.jpg"))); // NOI18N
+        slot8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.png"))); // NOI18N
         slot8.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)));
         slot8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot8.setMaximumSize(new java.awt.Dimension(100, 100));
@@ -306,7 +334,7 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
         getContentPane().add(slot8);
         slot8.setBounds(240, 290, 100, 100);
 
-        slot7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.jpg"))); // NOI18N
+        slot7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.png"))); // NOI18N
         slot7.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)));
         slot7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot7.setMaximumSize(new java.awt.Dimension(100, 100));
@@ -316,7 +344,7 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
         getContentPane().add(slot7);
         slot7.setBounds(130, 290, 100, 100);
 
-        slot1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.jpg"))); // NOI18N
+        slot1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.png"))); // NOI18N
         slot1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)));
         slot1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot1.setMaximumSize(new java.awt.Dimension(100, 100));
@@ -326,7 +354,7 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
         getContentPane().add(slot1);
         slot1.setBounds(130, 70, 100, 100);
 
-        slot0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.jpg"))); // NOI18N
+        slot0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.png"))); // NOI18N
         slot0.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)));
         slot0.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot0.setMaximumSize(new java.awt.Dimension(100, 100));
@@ -336,7 +364,7 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
         getContentPane().add(slot0);
         slot0.setBounds(20, 70, 100, 100);
 
-        slot2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.jpg"))); // NOI18N
+        slot2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.png"))); // NOI18N
         slot2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)));
         slot2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot2.setMaximumSize(new java.awt.Dimension(100, 100));
@@ -346,7 +374,7 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
         getContentPane().add(slot2);
         slot2.setBounds(240, 70, 100, 100);
 
-        slot5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.jpg"))); // NOI18N
+        slot5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.png"))); // NOI18N
         slot5.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)));
         slot5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot5.setMaximumSize(new java.awt.Dimension(100, 100));
@@ -356,7 +384,7 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
         getContentPane().add(slot5);
         slot5.setBounds(240, 180, 100, 100);
 
-        slot3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.jpg"))); // NOI18N
+        slot3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.png"))); // NOI18N
         slot3.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)));
         slot3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot3.setMaximumSize(new java.awt.Dimension(100, 100));
@@ -366,7 +394,7 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
         getContentPane().add(slot3);
         slot3.setBounds(20, 180, 100, 100);
 
-        slot6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.jpg"))); // NOI18N
+        slot6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/img1.png"))); // NOI18N
         slot6.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)));
         slot6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot6.setMaximumSize(new java.awt.Dimension(100, 100));
@@ -376,13 +404,32 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
         getContentPane().add(slot6);
         slot6.setBounds(20, 290, 100, 100);
 
+        exitGame.setBackground(new java.awt.Color(170, 140, 53));
+        exitGame.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
+        exitGame.setForeground(new java.awt.Color(255, 255, 255));
+        exitGame.setText("Exit");
+        exitGame.setBorderPainted(false);
+        exitGame.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        exitGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitGameActionPerformed(evt);
+            }
+        });
+        getContentPane().add(exitGame);
+        exitGame.setBounds(450, 420, 120, 40);
+
+        gameStatus.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
+        gameStatus.setForeground(new java.awt.Color(0, 102, 0));
+        gameStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(gameStatus);
+        gameStatus.setBounds(370, 240, 180, 50);
+
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/Untitled.png"))); // NOI18N
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(0, -10, 640, 490);
+        jLabel5.setBounds(0, -10, 580, 490);
 
-        jMenuBar1.setBackground(new java.awt.Color(0, 0, 51));
+        jMenuBar1.setBackground(new java.awt.Color(170, 140, 53));
         jMenuBar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 51), new java.awt.Color(0, 0, 51), null, null));
-        jMenuBar1.setForeground(new java.awt.Color(0, 0, 51));
 
         jMenu1.setText("Game");
 
@@ -424,23 +471,31 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Player");
-        jMenu2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu2ActionPerformed(evt);
-            }
-        });
+        jMenu2.setText("Player1");
 
-        mpStat.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
-        mpStat.setText("Multi Player Statisctics");
-        mpStat.addActionListener(new java.awt.event.ActionListener() {
+        player1start.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        player1start.setText("Multi Player Statisctics");
+        player1start.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mpStatActionPerformed(evt);
+                player1startActionPerformed(evt);
             }
         });
-        jMenu2.add(mpStat);
+        jMenu2.add(player1start);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Player2");
+
+        player2stat.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
+        player2stat.setText("Multi Player Statistics");
+        player2stat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                player2statActionPerformed(evt);
+            }
+        });
+        jMenu3.add(player2stat);
+
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -451,12 +506,6 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
         isGameOver=false;
         startNewGame();
     }//GEN-LAST:event_playAgainActionPerformed
-
-    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-        MultiPlayerStatistics mp = new MultiPlayerStatistics();
-        mp.setSup(this.sup);
-        mp.show();
-    }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void backToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToMainActionPerformed
         MainMenu m = new MainMenu();
@@ -479,15 +528,27 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
         startNewGame();
     }//GEN-LAST:event_newGameActionPerformed
 
-    private void mpStatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mpStatActionPerformed
+    private void player1startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player1startActionPerformed
         MultiPlayerStatistics mp = new MultiPlayerStatistics();
-        mp.setSup(this.sup);
+        mp.setSup1(this.sup,this);
         mp.show();
-    }//GEN-LAST:event_mpStatActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_player1startActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
        System.exit(0);
     }//GEN-LAST:event_exitActionPerformed
+
+    private void player2statActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player2statActionPerformed
+        MultiPlayerStatistics mp = new MultiPlayerStatistics();
+        mp.setSup2(this.sup,this);
+        mp.show();
+        this.setVisible(false);
+    }//GEN-LAST:event_player2statActionPerformed
+
+    private void exitGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitGameActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_exitGameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -527,6 +588,8 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem backToMain;
     private javax.swing.JMenuItem exit;
+    private javax.swing.JButton exitGame;
+    private javax.swing.JLabel gameStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -534,11 +597,13 @@ public class TicTacToeBoardMultiPlayer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem leaderboard;
-    private javax.swing.JMenuItem mpStat;
     private javax.swing.JMenuItem newGame;
     private javax.swing.JButton playAgain;
+    private javax.swing.JMenuItem player1start;
+    private javax.swing.JMenuItem player2stat;
     private javax.swing.JLabel slot0;
     private javax.swing.JLabel slot1;
     private javax.swing.JLabel slot2;

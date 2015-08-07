@@ -34,6 +34,7 @@ public class LeaderBoard extends javax.swing.JFrame {
      * Creates new form LeaderBoard
      */
     public LeaderBoard() {
+        setUndecorated(true);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         initComponents();
         setLocation((dim.width - jLabel5.getWidth())/2, (dim.height - jLabel5.getHeight())/2);
@@ -184,46 +185,49 @@ public class LeaderBoard extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         splayer1.setEditable(false);
+        splayer1.setBackground(new java.awt.Color(255, 255, 255));
         splayer1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         splayer1.setForeground(new java.awt.Color(0, 102, 0));
         getContentPane().add(splayer1);
-        splayer1.setBounds(360, 150, 210, 28);
+        splayer1.setBounds(360, 150, 210, 40);
 
         jLabel1.setFont(new java.awt.Font("Cooper Black", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 0));
         jLabel1.setText("Leader Board");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(183, 11, 280, 42);
+        jLabel1.setBounds(180, 30, 280, 42);
 
         splayer2.setEditable(false);
+        splayer2.setBackground(new java.awt.Color(255, 255, 255));
         splayer2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         splayer2.setForeground(new java.awt.Color(0, 102, 0));
         getContentPane().add(splayer2);
-        splayer2.setBounds(360, 220, 210, 28);
+        splayer2.setBounds(360, 220, 210, 40);
 
         splayer3.setEditable(false);
+        splayer3.setBackground(new java.awt.Color(255, 255, 255));
         splayer3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         splayer3.setForeground(new java.awt.Color(0, 102, 0));
         getContentPane().add(splayer3);
-        splayer3.setBounds(360, 290, 210, 28);
+        splayer3.setBounds(360, 290, 210, 40);
 
-        jLabel2.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Cooper Black", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 102, 0));
         jLabel2.setText("#2");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 220, 22, 22);
+        jLabel2.setBounds(20, 220, 30, 30);
 
-        jLabel3.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Cooper Black", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 102, 0));
         jLabel3.setText("#1");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(20, 150, 22, 22);
+        jLabel3.setBounds(20, 150, 30, 30);
 
-        jLabel4.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Cooper Black", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 102, 0));
         jLabel4.setText("#3");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(20, 290, 22, 22);
+        jLabel4.setBounds(20, 290, 30, 30);
 
         jLabel9.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 204, 0));
@@ -232,40 +236,43 @@ public class LeaderBoard extends javax.swing.JFrame {
         jLabel9.setBounds(380, 110, 177, 22);
 
         mplayer2.setEditable(false);
+        mplayer2.setBackground(new java.awt.Color(255, 255, 255));
         mplayer2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         mplayer2.setForeground(new java.awt.Color(0, 102, 0));
         getContentPane().add(mplayer2);
-        mplayer2.setBounds(60, 220, 210, 28);
+        mplayer2.setBounds(60, 220, 210, 40);
 
         mplayer3.setEditable(false);
+        mplayer3.setBackground(new java.awt.Color(255, 255, 255));
         mplayer3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         mplayer3.setForeground(new java.awt.Color(0, 102, 0));
         getContentPane().add(mplayer3);
-        mplayer3.setBounds(60, 290, 210, 28);
+        mplayer3.setBounds(60, 290, 210, 40);
 
         mplayer1.setEditable(false);
+        mplayer1.setBackground(new java.awt.Color(255, 255, 255));
         mplayer1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         mplayer1.setForeground(new java.awt.Color(0, 102, 0));
         getContentPane().add(mplayer1);
-        mplayer1.setBounds(60, 150, 210, 28);
+        mplayer1.setBounds(60, 150, 210, 40);
 
-        jLabel6.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Cooper Black", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 102, 0));
         jLabel6.setText("#1");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(320, 150, 22, 22);
+        jLabel6.setBounds(320, 150, 30, 30);
 
-        jLabel7.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Cooper Black", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 102, 0));
         jLabel7.setText("#2");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(320, 220, 22, 22);
+        jLabel7.setBounds(320, 220, 30, 30);
 
-        jLabel8.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Cooper Black", 0, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 102, 0));
         jLabel8.setText("#3");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(320, 290, 22, 22);
+        jLabel8.setBounds(320, 290, 30, 30);
 
         jLabel10.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(51, 204, 0));
@@ -273,11 +280,13 @@ public class LeaderBoard extends javax.swing.JFrame {
         getContentPane().add(jLabel10);
         jLabel10.setBounds(70, 110, 180, 22);
 
-        back.setBackground(new java.awt.Color(255, 255, 255));
+        back.setBackground(new java.awt.Color(170, 140, 53));
         back.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
-        back.setForeground(new java.awt.Color(51, 204, 0));
+        back.setForeground(new java.awt.Color(255, 255, 255));
         back.setText("Back");
-        back.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        back.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
+        back.setBorderPainted(false);
+        back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
@@ -286,7 +295,7 @@ public class LeaderBoard extends javax.swing.JFrame {
         getContentPane().add(back);
         back.setBounds(440, 370, 130, 44);
 
-        jLabel5.setBackground(new java.awt.Color(0, 102, 0));
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/Untitled.png"))); // NOI18N
         getContentPane().add(jLabel5);

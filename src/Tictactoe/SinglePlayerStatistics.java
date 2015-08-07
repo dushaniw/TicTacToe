@@ -14,6 +14,7 @@ import java.awt.Toolkit;
  */
 public class SinglePlayerStatistics extends javax.swing.JFrame {
     LeaderBoardHandler_SinglePlayer sup;
+    TicTacToeBoardSinglePlayer caller;
     /**
      * Creates new form SinglePlayerStatistics
      */
@@ -25,8 +26,9 @@ public class SinglePlayerStatistics extends javax.swing.JFrame {
         setSize(jLabel6.getWidth(), jLabel6.getHeight());
     }
 
-    public void setSup(LeaderBoardHandler_SinglePlayer sup){
+    public void setSup(LeaderBoardHandler_SinglePlayer sup,TicTacToeBoardSinglePlayer caller){
         this.sup=sup;
+        this.caller=caller;
         player.setText((String)String.valueOf(sup.getName()));
         wins.setText((String) String.valueOf(sup.getWins()));
         losses.setText((String) String.valueOf(sup.getLosses()));
@@ -49,7 +51,7 @@ public class SinglePlayerStatistics extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         losses = new javax.swing.JTextField();
         wins = new javax.swing.JTextField();
-        exit = new javax.swing.JButton();
+        back = new javax.swing.JButton();
         ties = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
 
@@ -82,6 +84,7 @@ public class SinglePlayerStatistics extends javax.swing.JFrame {
         jLabel2.setBounds(30, 120, 130, 22);
 
         player.setEditable(false);
+        player.setBackground(new java.awt.Color(255, 255, 255));
         player.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         player.setForeground(new java.awt.Color(0, 102, 0));
         getContentPane().add(player);
@@ -94,31 +97,36 @@ public class SinglePlayerStatistics extends javax.swing.JFrame {
         jLabel5.setBounds(430, 200, 100, 30);
 
         losses.setEditable(false);
+        losses.setBackground(java.awt.Color.white);
         losses.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         losses.setForeground(new java.awt.Color(0, 102, 0));
         getContentPane().add(losses);
         losses.setBounds(240, 240, 70, 50);
 
         wins.setEditable(false);
+        wins.setBackground(java.awt.Color.white);
         wins.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         wins.setForeground(new java.awt.Color(0, 102, 0));
         getContentPane().add(wins);
         wins.setBounds(60, 240, 70, 50);
 
-        exit.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
-        exit.setForeground(new java.awt.Color(51, 204, 0));
-        exit.setText("Exit");
-        exit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        exit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        exit.addActionListener(new java.awt.event.ActionListener() {
+        back.setBackground(new java.awt.Color(170, 140, 53));
+        back.setFont(new java.awt.Font("Cooper Black", 0, 18)); // NOI18N
+        back.setForeground(new java.awt.Color(255, 255, 255));
+        back.setText("Back");
+        back.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
+        back.setBorderPainted(false);
+        back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitActionPerformed(evt);
+                backActionPerformed(evt);
             }
         });
-        getContentPane().add(exit);
-        exit.setBounds(440, 340, 140, 40);
+        getContentPane().add(back);
+        back.setBounds(440, 340, 140, 40);
 
         ties.setEditable(false);
+        ties.setBackground(java.awt.Color.white);
         ties.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         ties.setForeground(new java.awt.Color(0, 102, 0));
         getContentPane().add(ties);
@@ -128,14 +136,15 @@ public class SinglePlayerStatistics extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(0, 102, 0));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tictactoe/Untitled.png"))); // NOI18N
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(0, 0, 598, 473);
+        jLabel6.setBounds(0, 0, 598, 400);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         this.dispose();
-    }//GEN-LAST:event_exitActionPerformed
+        this.caller.setVisible(true);
+    }//GEN-LAST:event_backActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,7 +182,7 @@ public class SinglePlayerStatistics extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton exit;
+    private javax.swing.JButton back;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
